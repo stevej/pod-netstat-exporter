@@ -1,0 +1,1 @@
+docker buildx build . --tag stevej/pod-netstat-exporter

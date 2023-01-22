@@ -20,3 +20,4 @@ FROM alpine:3.11
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /go/src/github.com/wish/pod-netstat-exporter/pod-netstat-exporter /root/pod-netstat-exporter
+ENTRYPOINT ["/root/pod-netstat-exporter"]
