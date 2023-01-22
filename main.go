@@ -102,10 +102,12 @@ func main() {
 	}
 	setupLogging(opts.LogLevel)
 
+	logrus.Debugf("setting up new client with ClientConfig: %s ", opts.ClientConfig)
 	client, err := kubelet.NewClient(opts.ClientConfig)
 	if err != nil {
 		logrus.Fatal(err)
 	}
+	logrus.Debugf("client: %s", client)
 
 	srv := &http.Server{
 		Addr: opts.BindAddr,
@@ -119,6 +121,7 @@ func main() {
 
 	metricsLimiter := rate.NewLimiter(rate.Limit(opts.RateLimit), 5)
 	http.HandleFunc("/metrics", func(rsp http.ResponseWriter, req *http.Request) {
+		logrus.Debugf("/metrics call %s", req)
 		if metricsLimiter.Allow() == false {
 			http.Error(rsp, http.StatusText(429), http.StatusTooManyRequests)
 			return

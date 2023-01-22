@@ -4,7 +4,7 @@ kubectl run pod-netstat-exporter \
   --port=9657 \
   --namespace="netstat" \
   --restart=Never \
-  --env="LOG_LEVEL=trace" \
+  --env="LOG_LEVEL=debug" \
 --overrides='
 {
   "spec": {

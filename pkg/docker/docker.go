@@ -98,6 +98,7 @@ func getPidForContainer(hostMountPath, id string) (int, error) {
 
 	id += "*"
 
+	logrus.Info("do we get to trying to build some filepaths?")
 	attempts := []string{
 		// Kubernetes with docker and CNI is even more different
 		filepath.Join(hostMountPath, cgroupRoot, "..", "systemd", "kubepods", "*", "pod*", id, "tasks"),
